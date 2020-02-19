@@ -1,41 +1,35 @@
+import React, {  useState,useEffect } from 'react';
+export default function Greeting() {
+  
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");;
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {useState} from 'react';
- function Clock1 () {
+  const handleFirstNameChange = (e) => setFirstName(e.target.value);
+  const handleLastNameChange = (e) => setLastName(e.target.value);
 
-   const[date,setDate]=useState(new Date());
-    
-    componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
-  };
-
-componentWillMount(){
-     clearInterval(this.timerID);
-};
-tick(){
-    setDate(new Date());
+useEffect(()=>{
+    document.title=`${firstName}`;
+    document.title=`${lastName}`;
 }
 
-
-  render() {
-    return (
-      <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-      </div>
-    );
+)
+  
+ const handleSubmit = (evt) => {
+      evt.preventDefault();
+      alert(`Submitting Name is:  ${firstName} ${lastName}`)
   }
-}
 
-function tick() {
-  ReactDOM.render(
-    <Clock  />,
-    document.getElementById('root')
+
+  return (
+    <div>
+        <form onSubmit={handleSubmit}>
+     FirstName: <input value={firstName} onChange={handleFirstNameChange} /><br /><br/>
+    LastName:  <input value={lastName} onChange={handleLastNameChange} />
+    <input type="submit" value="Submit" />
+      <p>
+        Hello, <span>{firstName} {lastName}</span>
+      </p>
+      </form>
+    </div>
   );
 }
-
-setInterval(tick, 1000);

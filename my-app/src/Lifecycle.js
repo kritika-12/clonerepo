@@ -1,45 +1,36 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-export default class Clock extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.state= {date: new Date()};
-    }
-
-
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
+export default class Greeting extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: '',
+      lastName: ''
+    };
+    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+    this.handleLastNameChange = this.handleLastNameChange.bind(this);
   }
 
-componentWillMount(){
-     clearInterval(this.timerID);
-}
-tick(){
-    this.setState({
-        date:new Date()
-    });
-}
-
+  handleFirstNameChange = (e) => this.setState({ firstName: e.target.value });
+  handleLastNameChange = (e) => this.setState({ lastName: e.target.value });
+  componentDidMount(){
+      document.title=`${this.state.firstName}`;
+      document.title=`${this.state.lastName}`;
+      
+  }
 
   render() {
     return (
       <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      firstName:  <input value={this.state.firstName} onChange={this.handleFirstNameChange} placeholder="firstname"/><br /><br/>
+        lastName: <input value={this.state.lastName} onChange={this.handleLastNameChange} placeholder="lastname"/>
+        <p>
+          <span>{this.state.firstName} {this.state.lastName}</span>
+        </p>
       </div>
     );
   }
 }
 
-function tick() {
-  ReactDOM.render(
-    <Clock  />,
-    document.getElementById('root')
-  );
-}
 
-setInterval(tick, 1000);
+
