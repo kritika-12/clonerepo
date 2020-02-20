@@ -11,7 +11,7 @@ export default function NameForm() {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Frirst Name:
+        First Name:
         <input
           type="text"
           value={fname}
